@@ -14,8 +14,6 @@ class FloralScraper
 
     def get_bouquets
         self.get_page.css(".grid__item")
-       
-  
     end
 
     def make_bouquets
@@ -23,6 +21,7 @@ class FloralScraper
             bouquet = Bouquet.new
             bouquet.name = bouquet_item.css(".h4").text
             bouquet.price = bouquet_item.css(".price-item.price-item--regular").text.strip
+            bouquet.link = bouquet_item.css("a.grid-view-item__link").attr('href')
         end
     end
 
@@ -31,7 +30,8 @@ class FloralScraper
         Bouquet.all.each do |bouquet|
             if bouquet.name && bouquet.name != ""
                 puts "Bouquet Name: #{bouquet.name}"
-                puts "Price: #{bouquet.price}"
+                puts "Bouquet Price: #{bouquet.price}"
+                puts "Bouquet Link: https://www.hbloom.com#{bouquet.link}"
                 puts " "
             end
         end

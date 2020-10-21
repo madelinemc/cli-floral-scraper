@@ -1,5 +1,5 @@
 class Bouquet
-   attr_accessor :name, :price
+   attr_accessor :name, :price, :link
 
     @@all = []
 
