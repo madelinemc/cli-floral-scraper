@@ -31,13 +31,14 @@ class FloralScraper
         Bouquet.all.each_with_index do |bouquet, index|
             if bouquet.name && bouquet.name != ""
                 puts "#{index + 1}. #{bouquet.name}"
-                puts "#{bouquet.price}"
+                puts "    #{bouquet.price}"
                 puts " "
             end
         end
     end
 
     def get_bouquet_info_page #second scrape
+        Bouquet.each |bouquet|
         second_url = "https://www.hbloom.com#{bouquet.link}"
         second_scrape = Nokogiri::HTML(open(second_url))
     end
@@ -46,7 +47,7 @@ class FloralScraper
         self.get_bouquet_info_page
         Bouquet.all.map do |bouquet|
             bouquet.description = second_scrape.css("div.product-single__description").children[1].text
-            bouquet.detail_list << second_scrape.css("div.product-single__description li").children.each do {|list| list }
+            bouquet.detail_list << second_scrape.css("div.product-single__description li").children.each #do {|list| puts list }
         end
     end
 
