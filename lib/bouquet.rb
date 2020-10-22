@@ -1,9 +1,14 @@
 class Bouquet
-   attr_accessor :name, :price, :link
+   attr_accessor :name, :price, :link, :descrption, :detail_list
 
     @@all = []
 
     def initialize
+        @name = name
+        @price = price
+        @link = link
+        @description = description
+        @detail_list = []
         @@all << self
     end
 

@@ -3,6 +3,7 @@ require 'nokogiri'
 require 'open-uri'
 
 require_relative './bouquet.rb'
+require_relative './cli.rb'
 
 class FloralScraper
 
@@ -27,16 +28,47 @@ class FloralScraper
 
     def print_bouquets
         self.make_bouquets
-        Bouquet.all.each do |bouquet|
+        Bouquet.all.each_with_index do |bouquet, index|
             if bouquet.name && bouquet.name != ""
-                puts "Bouquet Name: #{bouquet.name}"
-                puts "Bouquet Price: #{bouquet.price}"
-                puts "Bouquet Link: https://www.hbloom.com#{bouquet.link}"
+                puts "#{index + 1}. #{bouquet.name}"
+                puts "#{bouquet.price}"
                 puts " "
             end
         end
     end
+
+    def get_bouquet_info_page #second scrape
+        second_url = "https://www.hbloom.com#{bouquet.link}"
+        second_scrape = Nokogiri::HTML(open(second_url))
+    end
+
+    def add_bouquet_info #adds description and detail list from second scrape to each Bouquet instance. !is .map right?
+        self.get_bouquet_info_page
+        Bouquet.all.map do |bouquet|
+            bouquet.description = second_scrape.css("div.product-single__description").children[1].text
+            bouquet.detail_list << second_scrape.css("div.product-single__description li").children.each do {|list| list }
+        end
+    end
+
+    def print_bouquet_info(user_input) #iterates over all bouquet instances, selects the one that matches the user_input and prints the details and description
+        Bouquet.all.each_with_index do |bouquet, index|
+            if user_input - 1 == index
+                puts "#{bouquet.name}"
+                puts ""
+                puts "Description: #{bouquet.description}"
+                puts ""
+                puts "Price: #{bouquet.price}"
+                puts ""
+                puts "Bundle includes: #{bouquet.detail_list}"
+            else
+            end
+        end
+    end
+
+    
+
+
     
 end
 
-FloralScraper.new.print_bouquets
+# FloralScraper.new.get_bouquet_info_page 
