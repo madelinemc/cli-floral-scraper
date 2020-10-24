@@ -8,12 +8,12 @@ require_relative './cli-floral-scraper.rb'
 class CLI
 
     def welcome
-        puts "\n\n\n      BLOOM SHOP\n\n\n"
+        puts `clear`
+        puts "\n\n\n      BLOOM SHOP\n\n\n\n\n"
         sleep(1)
         puts "Welcome to the BLOOM SHOP where you can choose from a bundle of flowers to DIY your own arrangement!"
-        puts "\nHere is a list of all the available bundles:"
+        puts "\n\nHere is a list of all the available bundles:"
     end
-
 
 
     def run
