@@ -27,19 +27,16 @@ class Bouquet
     end
 
     def print_selected_bouquet #prints the current instance of Bouquet
-        puts "#{self.name}"
-        puts ""
-        puts "Description: #{self.description}"
-        puts ""
-        puts "Price: #{self.price}"
-        puts ""
-        puts "Bundle includes: #{self.detail_list}"
+        puts "\n\n#{self.name}"
+        puts "\nDescription: #{self.description}"
+        puts "\nPrice: #{self.price}"
+        puts "\nBundle includes: #{self.detail_list}"
     end
 
     def self.find_by_index(user_input)
 
         self.all.each_with_index do |each_instance, index|
-            if index == user_input.to_i
+            if index == user_input.to_i - 1
                 return each_instance
             else
             end
