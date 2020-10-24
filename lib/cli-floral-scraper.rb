@@ -7,14 +7,19 @@ require_relative './cli.rb'
 
 class FloralScraper
 
+    def initialize
+        @base_url = "https://www.hbloom.com"
+    end
+
+
+    #first scrape
     def get_page
-        url = "https://www.hbloom.com/collections/florist-crafted-bouquets" 
-        html = open(url)
-        flower_bouquets = Nokogiri::HTML(html)
+        html = open(@base_url + "/collections/florist-crafted-bouquets")
+        html_parsed_to_elements = Nokogiri::HTML(html)
     end
 
     def get_bouquets
-        self.get_page.css(".grid__item")
+        self.get_page.css(".grid__item--collection-template")
     end
 
     def make_bouquets
@@ -22,54 +27,55 @@ class FloralScraper
             bouquet = Bouquet.new
             bouquet.name = bouquet_item.css(".h4").text
             bouquet.price = bouquet_item.css(".price-item.price-item--regular").text.strip
-            bouquet.link = bouquet_item.css("a.grid-view-item__link").attr('href')
+            bouquet.link = bouquet_item.css("a.grid-view-item__link").attr('href').value
         end
     end
 
-    def print_bouquets
-        self.make_bouquets
-        Bouquet.all.each_with_index do |bouquet, index|
-            if bouquet.name && bouquet.name != ""
-                puts "#{index + 1}. #{bouquet.name}"
-                puts "    #{bouquet.price}"
-                puts " "
-            end
-        end
+
+    #second scrape
+    def get_bouquet_info_page(bouquet)
+        second_html = open(@base_url + bouquet.link)
+        second_html_parsed_to_elements = Nokogiri::HTML(second_html)
+        #adds description and detail list from second scrape to each Bouquet instance.
+        bouquet.description = second_html_parsed_to_elements.css("div.product-single__description").children[1].text
+        bouquet.detail_list << second_html_parsed_to_elements.css("div.product-single__description li").children
     end
-
-    def get_bouquet_info_page #second scrape
-        Bouquet.each |bouquet|
-        second_url = "https://www.hbloom.com#{bouquet.link}"
-        second_scrape = Nokogiri::HTML(open(second_url))
-    end
-
-    def add_bouquet_info #adds description and detail list from second scrape to each Bouquet instance. !is .map right?
-        self.get_bouquet_info_page
-        Bouquet.all.map do |bouquet|
-            bouquet.description = second_scrape.css("div.product-single__description").children[1].text
-            bouquet.detail_list << second_scrape.css("div.product-single__description li").children.each #do {|list| puts list }
-        end
-    end
-
-    def print_bouquet_info(user_input) #iterates over all bouquet instances, selects the one that matches the user_input and prints the details and description
-        Bouquet.all.each_with_index do |bouquet, index|
-            if user_input - 1 == index
-                puts "#{bouquet.name}"
-                puts ""
-                puts "Description: #{bouquet.description}"
-                puts ""
-                puts "Price: #{bouquet.price}"
-                puts ""
-                puts "Bundle includes: #{bouquet.detail_list}"
-            else
-            end
-        end
-    end
-
-    
-
 
     
 end
 
-# FloralScraper.new.get_bouquet_info_page 
+# FloralScraper.new.get_bouquet_info_page(bouquet)
+
+
+
+  
+# class Scraper
+#     def initialize
+#       @base_url = "https://pitchfork.com"
+#     end
+  
+#     def first_scrape
+#       html = open(@base_url + "/reviews/albums")
+#       html_parsed_to_elements = Nokogiri::HTML(html)
+#       review_elements = html_parsed_to_elements.css('.review')
+  
+#       review_elements.each do |review_element|
+#         artist = review_element.css("li")[0].text
+#         album_title = review_element.css("h2").text
+#         genre_name = review_element.css("a")[1].text
+#         review_url = review_element.css(".review__link")[0].attr("href")
+  
+#         genre = Genre.find_or_create_by_name(genre_name)
+  
+#         review = Review.new(artist, album_title, genre, review_url)
+#       end
+#     end
+  
+#     def second_scrape(review)
+#       review_html = open(@base_url + review.review_url)
+#       review_html_parsed_to_elements = Nokogiri::HTML(review_html)
+#       review.review = review_html_parsed_to_elements.css(".review-detail__abstract").text
+#       review.score = review_html_parsed_to_elements.css(".score").text
+#     end
+  
+#   end
