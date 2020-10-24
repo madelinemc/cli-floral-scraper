@@ -30,7 +30,8 @@ class Bouquet
         puts "\n\n#{self.name}"
         puts "\nDescription: #{self.description}"
         puts "\nPrice: #{self.price}"
-        puts "\nBundle includes: #{self.detail_list}"
+        puts "\nBundle includes:"
+        puts self.detail_list.map { |detail| "- " + detail }
     end
 
     def self.find_by_index(user_input)

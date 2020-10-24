@@ -38,7 +38,8 @@ class FloralScraper
         second_html_parsed_to_elements = Nokogiri::HTML(second_html)
         #adds description and detail list from second scrape to each Bouquet instance.
         bouquet.description = second_html_parsed_to_elements.css("div.product-single__description").children[1].text
-        bouquet.detail_list << second_html_parsed_to_elements.css("div.product-single__description li").children
+        bouquet.detail_list = second_html_parsed_to_elements.css("div.product-single__description li").children.map { |element| element.text}
+        bouquet.detail_list.delete_at(-1)
     end
 
     
