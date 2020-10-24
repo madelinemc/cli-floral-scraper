@@ -20,7 +20,6 @@ class Bouquet
         Bouquet.all.each_with_index do |bouquet, index|
             if bouquet.name && bouquet.name != ""
                 puts "#{index + 1}. #{bouquet.name}"
-                puts ""
             end
         end
     end

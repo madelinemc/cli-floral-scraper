@@ -8,10 +8,10 @@ require_relative './cli-floral-scraper.rb'
 class CLI
 
     def welcome
-        puts "BLOOM SHOP"
+        puts "\n\n\n      BLOOM SHOP\n\n\n"
         sleep(1)
         puts "Welcome to the BLOOM SHOP where you can choose from a bundle of flowers to DIY your own arrangement!"
-        puts "Here is a list of all the available bundles:"
+        puts "\nHere is a list of all the available bundles:"
     end
 
 
@@ -24,7 +24,7 @@ class CLI
         until user_input == "exit"
             Bouquet.print_all_bouquets
             sleep(1)
-            puts "If you want to hear what flowers are in any of the bundles, just enter the number. Or you can type 'exit' anytime."
+            puts "\n\nIf you want to hear what flowers are in any of the bundles, just enter the number. Or you can type 'exit' anytime."
         
             user_input = gets.chomp
             if user_input.to_i > 0 && user_input.to_i < Bouquet.all.length + 1 
@@ -34,8 +34,8 @@ class CLI
                 selected_bouquet.print_selected_bouquet #use that bouquet instances to do the second scrape and then display it 
                 
                 puts "\n\nWould you like to make a bouquet with this bundle?"
-                puts "\nEnter 'y' to select the bundle or 'n' to return to the list of all bundles." 
-                user_input = gets.chomp #normalize?
+                puts "\nEnter 'y' to select the bundle or 'n' to return to the list of all bundles.\n\n" 
+                user_input = gets.chomp.downcase #normalize?
                 if user_input == "y"
                     puts "#{selected_bouquet.name} is a great choice! Thanks For shopping at the BLOOM SHOP!"
                     exit
@@ -46,7 +46,7 @@ class CLI
                 puts "Thanks for shopping at the BLOOM SHOP!"
                 exit
             else
-                puts "I've never heard of that flower! Can you try entering again?"
+                puts "\nI've never heard of that flower! Can you try entering again?\n"
             end
         end
         
