@@ -7,62 +7,74 @@ require_relative './cli-floral-scraper.rb'
 
 class CLI
 
-    def run
-        puts "LOGO"
+    def welcome
+        puts "BLOOM SHOP"
         sleep(1)
-        puts "Welcome Message"
+        puts "Welcome to the BLOOM SHOP where you can choose from a bundle of flowers to DIY your own arrangement!"
+        puts "Here is a list of all the available bundles:"
+    end
+
+
+
+    def run
+        self.welcome
         my_floral_scraper = FloralScraper.new #make the thing and store it in instance variable so that it can be used in different ways
         my_floral_scraper.make_bouquets 
-        Bouquet.print_all_bouquets
-        sleep(1)
-        puts "If you want to hear what flowers are in any of the bundles, just enter the number. Or you can type 'exit'"
         user_input = nil
+        until user_input == "exit"
+            Bouquet.print_all_bouquets
+            sleep(1)
+            puts "If you want to hear what flowers are in any of the bundles, just enter the number. Or you can type 'exit' anytime."
+        
             user_input = gets.chomp
             if user_input.to_i > 0 && user_input.to_i < Bouquet.all.length + 1 
                 
-                selected_bouquet = Bouquet.find_by_index(user_input)  #1.Find the bouquet the matches what the user entered
+                selected_bouquet = Bouquet.find_by_index(user_input)  #find the bouquet the matches what the user entered
                 my_floral_scraper.get_bouquet_info_page(selected_bouquet)
-                selected_bouquet.print_selected_bouquet #write logic to find boquet here
-            
-                #2. Use that bouquet instances to do the second scrape and then display it 
+                selected_bouquet.print_selected_bouquet #use that bouquet instances to do the second scrape and then display it 
                 
-                # Bouquet.all.each_with_index do |bouquet, index| index +1 == user_input 
-                #     FloralScraper.new.get_bouquet_info_page(bouquet) # figure out how to pass bouquet instance
-                #     FloralScraper.new.print_bouquet_info(user_input)
-                # end
                 puts "\n\nWould you like to make a bouquet with this bundle?"
-                puts "\nEnter 'y' to select the bundle and receive some floral arrangement tips or 'n' to return to the list of all bundles." #add or return to bouquet list
+                puts "\nEnter 'y' to select the bundle or 'n' to return to the list of all bundles." 
+                user_input = gets.chomp #normalize?
+                if user_input == "y"
+                    puts "#{selected_bouquet.name} is a great choice! Thanks For shopping at the BLOOM SHOP!"
+                    exit
+                elsif user_input == "n"
+                end
+     
             elsif user_input == "exit"
-                puts "Thanks for shopping at the Flower Shop!"
+                puts "Thanks for shopping at the BLOOM SHOP!"
                 exit
             else
                 puts "I've never heard of that flower! Can you try entering again?"
             end
+        end
         
     end
 
 end
 
+#possible refactor: 
+
+    # def run
+    #     welcome
+    #     user_input = ""
+    #     until user_input == "exit"
+    #         FloralScraper.all_bouquets
+    #         user_input = gets.chomp
+    #         if user_input.to_i > 0 && user_input.to_i < Bouquet.all.length + 1 
+    #         FloralScraper.select_bouquet
+    #         next_selection
+    #     end
+    #     puts "good bye message"
+    #     exit 
+    # end
 
 
-#         until
-#         FloralScraper.new.print_bouquets
-#         sleep(2)
-#         puts "If you want to hear what flowers are in any of the bundles, just enter the number. Or you can type 'exit.'"
-#         user_input = nil
-#         while user_input != "exit"
-#             user_input = gets.chomp
-#             if user_input.to_i > 0 && user_input.to_i < Bouquet.self.all.length + 1
-#                 index = user_input.to_i + 1
-#                 return index
-#             elsif user_input == "exit"
-#                 puts "Good Bye Message!"
-#                 exit
-#             else
-#                 puts "I've never heard of that flower! Can you try entering again?"
-#             end
-#         end
-#     end
-#         input
 
-# end
+    # def user_selects_bouquet
+        
+    #     Bouquet.find_by_index(user_input)
+
+    # def next_selection
+    # end
