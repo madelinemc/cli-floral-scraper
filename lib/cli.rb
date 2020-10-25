@@ -5,15 +5,26 @@ require 'open-uri'
 require_relative './bouquet.rb'
 require_relative './cli-floral-scraper.rb'
 
+@@logo = "bl\u{0273F}\u{02740}m sh\u{0273B}p"
+
 class CLI
 
     def welcome
         puts `clear`
-        puts "\n\n\n      BLOOM SHOP\n\n\n\n\n"
+        bloom_one = "\u{0273F}"
+        puts bloom_one
+        bloom_two = "\u{02740}"
+        puts bloom_two
+        bloom_three = "\u{0273B}"
+        puts bloom_three
+        puts "\n\n\n      bl#{bloom_one}#{bloom_two}m sh#{bloom_three}p\n\n\n\n\n"
+        puts @@logo
+        puts "this is the logo #{@@logo} of the shop"
         sleep(1)
         puts "Welcome to the BLOOM SHOP where you can choose from a bundle of flowers to DIY your own arrangement!"
         puts "\n\nHere is a list of all the available bundles:"
     end
+
 
 
     def run
@@ -35,7 +46,7 @@ class CLI
                 
                 puts "\n\nWould you like to make a bouquet with this bundle?"
                 puts "\nEnter 'y' to select the bundle or 'n' to return to the list of all bundles.\n\n" 
-                user_input = gets.chomp.downcase #normalize?
+                user_input = gets.chomp.downcase
                 if user_input == "y"
                     puts "#{selected_bouquet.name} is a great choice! Thanks For shopping at the BLOOM SHOP!"
                     exit
@@ -78,3 +89,16 @@ end
 
     # def next_selection
     # end
+
+    #LOGO UNICODE: 
+
+    # puts bloom_one
+    # bloom_two = "\u{02740}"
+    # puts bloom_two
+    # bloom_three = "\u{0273B}"
+    # puts bloom_three
+    # puts "\n\n\n      bl#{bloom_one}#{bloom_two}m sh#{bloom_three}p\n\n\n\n\n"
+    # puts @@logo
+    # puts "this is the logo #{@@logo} of the shop"
+
+    # @@logo = "bl\u{0273F}\u{02740}m sh\u{0273B}p"
