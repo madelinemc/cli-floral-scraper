@@ -4,7 +4,7 @@ require 'open-uri'
 require 'rainbow'
 
 require_relative './bouquet.rb'
-require_relative './cli-floral-scraper.rb'
+require_relative './scraper.rb'
 
 @@logo = Rainbow("bl\u{0273F}\u{02740}m sh\u{0273B}p").color(135,215,95)
 
@@ -20,7 +20,7 @@ class CLI
 
     def run
         self.welcome
-        my_floral_scraper = FloralScraper.new #instantiate FloralScraper class and store it in a instance variable
+        my_floral_scraper = Scraper.new #instantiate FloralScraper class and store it in a instance variable
         my_floral_scraper.make_bouquets 
         user_input = nil
         until user_input == "exit" #starting loop
