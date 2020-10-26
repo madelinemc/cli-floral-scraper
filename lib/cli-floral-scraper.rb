@@ -1,10 +1,3 @@
-# require 'pry'
-# require 'nokogiri'
-# require 'open-uri'
-
-# require_relative './bouquet.rb'
-# require_relative './cli.rb'
-
 class FloralScraper
 
     def initialize
