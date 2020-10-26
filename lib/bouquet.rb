@@ -25,7 +25,7 @@ class Bouquet
     end
 
     def print_selected_bouquet #prints the current instance of Bouquet
-        puts "\n\n#{self.name}"
+        puts Rainbow("\n\n#{self.name}").underline
         puts "\nDescription: #{self.description}"
         puts "\nPrice: #{self.price}"
         puts "\nBundle includes:"

@@ -18,9 +18,6 @@ class CLI
         puts "\n\nHere is a list of all the available bundles:"
     end
 
-    @@logo = Rainbow("bloom shop").mediumspringgreen
-    @@logo = Rainbow("bl\u{0273F}\u{02740}m sh\u{0273B}p").color(135,215,95)
-
     def run
         self.welcome
         my_floral_scraper = FloralScraper.new #make the thing and store it in instance variable so that it can be used in different ways
@@ -42,13 +39,13 @@ class CLI
                 puts "\nEnter 'y' to select the bundle or 'n' to return to the list of all bundles.\n\n" 
                 user_input = gets.chomp.downcase
                 if user_input == "y"
-                    puts "#{selected_bouquet.name} is a great choice! Thanks For shopping at the BLOOM SHOP!"
+                    puts "#{selected_bouquet.name} is a great choice! Thanks For shopping at the #{@@logo}!"
                     exit
                 elsif user_input == "n"
                 end
      
             elsif user_input == "exit"
-                puts "Thanks for shopping at the BLOOM SHOP!"
+                puts "Thanks for shopping at the #{@@logo}!"
                 exit
             else
                 puts "\nI've never heard of that flower! Can you try entering again?\n"
