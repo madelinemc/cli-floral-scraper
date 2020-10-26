@@ -1,31 +1,25 @@
 require 'pry'
 require 'nokogiri'
 require 'open-uri'
+require 'rainbow'
 
 require_relative './bouquet.rb'
 require_relative './cli-floral-scraper.rb'
 
-@@logo = "bl\u{0273F}\u{02740}m sh\u{0273B}p"
+@@logo = Rainbow("bl\u{0273F}\u{02740}m sh\u{0273B}p").color(135,215,95)
 
 class CLI
 
     def welcome
         puts `clear`
-        bloom_one = "\u{0273F}"
-        puts bloom_one
-        bloom_two = "\u{02740}"
-        puts bloom_two
-        bloom_three = "\u{0273B}"
-        puts bloom_three
-        puts "\n\n\n      bl#{bloom_one}#{bloom_two}m sh#{bloom_three}p\n\n\n\n\n"
-        puts @@logo
-        puts "this is the logo #{@@logo} of the shop"
+        puts "\n\n\n      #{@@logo}\n\n\n\n\n"
         sleep(1)
-        puts "Welcome to the BLOOM SHOP where you can choose from a bundle of flowers to DIY your own arrangement!"
+        puts "Welcome to the bloom shop where you can choose from a bundle of flowers to DIY your own arrangement!"
         puts "\n\nHere is a list of all the available bundles:"
     end
 
-
+    @@logo = Rainbow("bloom shop").mediumspringgreen
+    @@logo = Rainbow("bl\u{0273F}\u{02740}m sh\u{0273B}p").color(135,215,95)
 
     def run
         self.welcome
@@ -80,25 +74,3 @@ end
     #     puts "good bye message"
     #     exit 
     # end
-
-
-
-    # def user_selects_bouquet
-        
-    #     Bouquet.find_by_index(user_input)
-
-    # def next_selection
-    # end
-
-    #LOGO UNICODE: 
-
-    # puts bloom_one
-    # bloom_two = "\u{02740}"
-    # puts bloom_two
-    # bloom_three = "\u{0273B}"
-    # puts bloom_three
-    # puts "\n\n\n      bl#{bloom_one}#{bloom_two}m sh#{bloom_three}p\n\n\n\n\n"
-    # puts @@logo
-    # puts "this is the logo #{@@logo} of the shop"
-
-    # @@logo = "bl\u{0273F}\u{02740}m sh\u{0273B}p"
