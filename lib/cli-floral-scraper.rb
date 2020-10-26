@@ -31,14 +31,6 @@ class FloralScraper
         end
     end
 
-    def self.all_bouquets # calls on get_page, get_bouquets, make_bouquets, and prints them
-        self.new.make_bouquets
-        Bouquet.print_all_bouquets
-        sleep(0.5)
-        puts "If you want to hear what flowers are in any of the bundles, just enter the number. Or you can type 'exit' anytime."
-    end
-
-
     #second scrape
     def get_bouquet_info_page(bouquet)
         second_html = open(@base_url + bouquet.link)

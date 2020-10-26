@@ -24,14 +24,6 @@ class Bouquet
         end
     end
 
-    def print_selected_bouquet #prints the current instance of Bouquet
-        puts Rainbow("\n\n#{self.name}").underline
-        puts "\nDescription: #{self.description}"
-        puts "\nPrice: #{self.price}"
-        puts "\nBundle includes:"
-        puts self.detail_list.map { |detail| "- " + detail }
-    end
-
     def self.find_by_index(user_input)
 
         self.all.each_with_index do |each_instance, index|
@@ -42,6 +34,15 @@ class Bouquet
         end
 
         puts "I've never heard of that flower! Can you try entering again?"
+    end
+
+
+    def print_selected_bouquet #prints the current instance of Bouquet
+        puts Rainbow("\n\n#{self.name}").underline
+        puts "\nDescription: #{self.description}"
+        puts "\nPrice: #{self.price}"
+        puts "\nBundle includes:"
+        puts self.detail_list.map { |detail| "- " + detail }
     end
         
 

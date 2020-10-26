@@ -20,10 +20,10 @@ class CLI
 
     def run
         self.welcome
-        my_floral_scraper = FloralScraper.new #make the thing and store it in instance variable so that it can be used in different ways
+        my_floral_scraper = FloralScraper.new #instantiate FloralScraper class and store it in a instance variable
         my_floral_scraper.make_bouquets 
         user_input = nil
-        until user_input == "exit"
+        until user_input == "exit" #starting loop
             Bouquet.print_all_bouquets
             sleep(1)
             puts "\n\nIf you want to hear what flowers are in any of the bundles, just enter the number. Or you can type 'exit' anytime."
@@ -55,19 +55,3 @@ class CLI
     end
 
 end
-
-#possible refactor: 
-
-    # def run
-    #     welcome
-    #     user_input = ""
-    #     until user_input == "exit"
-    #         FloralScraper.all_bouquets
-    #         user_input = gets.chomp
-    #         if user_input.to_i > 0 && user_input.to_i < Bouquet.all.length + 1 
-    #         FloralScraper.select_bouquet
-    #         next_selection
-    #     end
-    #     puts "good bye message"
-    #     exit 
-    # end
